@@ -6,7 +6,7 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 13:51:36 by gpollast          #+#    #+#             */
-/*   Updated: 2026/03/04 19:07:57 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/05 10:37:03 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,39 @@ static bool isOperator(char c)
     return false;
 }
 
+static void	rpnCalculator(std::list<int>& lst, char c)
+{
+	int	a = lst.back();
+	lst.pop_back();
+	int	b = lst.back();
+	lst.pop_back();
+	int result = 0;
+	switch (c)
+	{
+		case ('+'):
+			result = b + a;
+			break;
+		case ('-'):
+			result = b - a;
+			break;
+		case ('/'):
+			if (a == 0)
+				throw RPN::DivideByZero();
+			result = b / a;
+			break;
+		case ('*'):
+			result = b * a;
+	}
+	lst.push_back(result);
+}
+
+static void	printRPNResult(std::list<int>& lst)
+{
+    for (std::list<int>::iterator it = lst.begin(); it != lst.end(); it++)
+        std::cout << *it << ' ';
+    std::cout << std::endl;
+}
+
 void RPN::rpn(const std::string& str) {
     std::list<int>  lst;
     std::stringstream ss(str);
@@ -47,16 +80,11 @@ void RPN::rpn(const std::string& str) {
         if (token.size() > 1)
             throw BadInput();
         if (isdigit(token[0]))
-        {
-            lst.push_front(token[0] - '0');
-            // std::cout << token << std::endl;
-        }
+            lst.push_back(token[0] - '0');
         else if (isOperator(token[0]) && lst.size() >= 2)
-            std::cout << token[0] << std::endl;
+			rpnCalculator(lst, token[0]);
         else
             throw BadInput();
     }
-    for (std::list<int>::iterator it = lst.begin(); it != lst.end(); it++)
-        std::cout << *it << std::endl;
-    // std::cout << str << std::endl;
+	printRPNResult(lst);
 }

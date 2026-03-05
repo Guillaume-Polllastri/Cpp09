@@ -6,7 +6,7 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 13:52:14 by gpollast          #+#    #+#             */
-/*   Updated: 2026/03/04 18:37:50 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/05 10:34:12 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ class RPN {
 			public:
 				virtual const char* what() const throw() {
 					return "Error";
+				}
+		};
+
+		class DivideByZero: public std::exception
+		{
+			public:
+				virtual const char* what() const throw() {
+					return "Error Divide by zero !";
 				}
 		};
 };
