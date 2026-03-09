@@ -6,7 +6,7 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 20:10:42 by gpollast          #+#    #+#             */
-/*   Updated: 2026/03/09 18:19:43 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/09 19:58:03 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <iostream>
 #include <exception>
 #include <cstdlib>
+#include <climits>
+#include <cerrno>
 
 struct Pair {
 	int		maxValue;
@@ -49,9 +51,17 @@ class PmergeMe {
 	
 	    while (av[i])
 	    {
-	        // if (token.size() > 1) PARSING à faire plus tard
-	        //     throw PmergeMe::BadInput();
-	        deq.push_back(atoi(av[i]));
+        	errno = 0;
+        	char* end;
+        	long tmp = std::strtol(av[i], &end, 10);
+			
+        	if (end == av[i] || *end != '\0')
+        	    throw PmergeMe::BadInput();
+        	if (errno == ERANGE)
+        	    throw PmergeMe::BadInput();
+        	if (tmp > INT_MAX || tmp < 0)
+        	    throw PmergeMe::BadInput();
+        	deq.push_back(static_cast<int>(tmp));
 			i++;
 	    }
 	}

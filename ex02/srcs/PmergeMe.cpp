@@ -6,13 +6,14 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 20:10:39 by gpollast          #+#    #+#             */
-/*   Updated: 2026/03/09 18:19:45 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/09 19:57:21 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 #include <sstream>
 #include <utility>
+#include <cstring>
 
 PmergeMe::PmergeMe(std::vector<int> vec): _vec(vec), _deq(), _hasRemainingValue(false), _remainingValue(0) {}
 
