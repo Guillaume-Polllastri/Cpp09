@@ -6,7 +6,7 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 09:39:57 by gpollast          #+#    #+#             */
-/*   Updated: 2026/03/12 19:01:16 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/12 19:35:36 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ class BitcoinExchange {
 
 		int	fillData(const std::string& fileData);
 		double	getRateValueFromDate(const std::string& date);
-		int	readInputFile(const std::string& inputFileName);
+		int	processInputFile(const std::string& inputFileName);
 	
-		class BadInput: public std::exception
+		class InvalidDate: public std::exception
 		{
 			public:
 				virtual const char* what() const throw() {
-					return "Error: bad input => ";
+					return "Error: invalid date => ";
 				}
 		};
 };
