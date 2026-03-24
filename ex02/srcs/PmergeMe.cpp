@@ -6,7 +6,7 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 20:10:39 by gpollast          #+#    #+#             */
-/*   Updated: 2026/03/24 09:23:04 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/24 09:28:57 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,27 @@ static	std::vector<Pair>	makePair(std::vector<Chain>& vec, bool& _hasRemainingVa
 	return (pairs);
 }
 
-static void	sortPairByMaxValues(std::vector<Pair>& pairs) {
-	for (size_t x = 1; x < pairs.size(); x++)
-	{
-		Pair p = pairs[x];
-		int y = x;
-		while (y > 0 && pairs[y - 1].maxValue > p.maxValue)
-		{
-			pairs[y] = pairs[y - 1];
-			y--;
-		}
-		pairs[y] = p;
-	}
+static void insertPairRecursive(std::vector<Pair>& pairs, size_t pos, const Pair& value) {
+    if (pos == 0 || pairs[pos - 1].maxValue <= value.maxValue) {
+        pairs[pos] = value;
+        return;
+    }
+    pairs[pos] = pairs[pos - 1];
+    insertPairRecursive(pairs, pos - 1, value);
+}
+
+static void sortPairByMaxValuesRecursive(std::vector<Pair>& pairs, size_t n) {
+    if (n <= 1)
+        return;
+
+    sortPairByMaxValuesRecursive(pairs, n - 1);
+
+    Pair last = pairs[n - 1];
+    insertPairRecursive(pairs, n - 1, last);
+}
+
+static void sortPairByMaxValues(std::vector<Pair>& pairs) {
+    sortPairByMaxValuesRecursive(pairs, pairs.size());
 }
 
 static size_t	searchMaxIndex(const std::vector<Chain>& mainChain, size_t index)
@@ -197,18 +206,27 @@ static	std::deque<Pair>	makePair(std::deque<Chain>& vec, bool& _hasRemainingValu
     return (pairs);
 }
 
-static void	sortPairByMaxValues(std::deque<Pair>& pairs) {
-    for (size_t x = 1; x < pairs.size(); x++)
-    {
-        Pair p = pairs[x];
-        int y = x;
-        while (y > 0 && pairs[y - 1].maxValue > p.maxValue)
-        {
-            pairs[y] = pairs[y - 1];
-            y--;
-        }
-        pairs[y] = p;
+static void insertPairRecursiveDeque(std::deque<Pair>& pairs, size_t pos, const Pair& value) {
+    if (pos == 0 || pairs[pos - 1].maxValue <= value.maxValue) {
+        pairs[pos] = value;
+        return;
     }
+    pairs[pos] = pairs[pos - 1];
+    insertPairRecursiveDeque(pairs, pos - 1, value);
+}
+
+static void sortPairByMaxValuesRecursiveDeque(std::deque<Pair>& pairs, size_t n) {
+    if (n <= 1)
+        return;
+
+    sortPairByMaxValuesRecursiveDeque(pairs, n - 1);
+
+    Pair last = pairs[n - 1];
+    insertPairRecursiveDeque(pairs, n - 1, last);
+}
+
+static void sortPairByMaxValues(std::deque<Pair>& pairs) {
+    sortPairByMaxValuesRecursiveDeque(pairs, pairs.size());
 }
 
 static size_t	searchMaxIndex(const std::deque<Chain>& mainChain, size_t index)
