@@ -6,7 +6,7 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 20:09:27 by gpollast          #+#    #+#             */
-/*   Updated: 2026/03/09 18:50:57 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/24 09:25:00 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,32 @@ int	main(int ac, char **av)
 		if (ac < 2)
 			throw PmergeMe::BadInput();
 	
-		std::vector<int>	vec;
+		std::vector<Chain>	vec;
 		
 		PmergeMe	p1(vec);
 		p1.setContainer(vec, av);
-		std::cout << "Before: ";
+		std::cout << "[VECTOR] Before: ";
 		p1.printContainer(vec.begin(), vec.end());
 
 		clock_t	startVector = clock();
 		p1.MergeInsertionSort(vec);
 		clock_t	endVector = clock();
 
-		std::cout << "After:  ";
+		std::cout << "[VECTOR] After:  ";
 		p1.printContainer(vec.begin(), vec.end());
 
-		std::deque<int>		deq;
+		std::deque<Chain>		deq;
 		PmergeMe	p2(deq);
 		p2.setContainer(deq, av);
+		std::cout << "[DEQUE] Before: ";
+		p1.printContainer(vec.begin(), vec.end());
 
 		clock_t	startDeque = clock();
 		p2.MergeInsertionSort(deq);
 		clock_t	endDeque = clock();
+
+		std::cout << "[VECTOR] After:  ";
+		p1.printContainer(vec.begin(), vec.end());
 
 		double	timeVector = static_cast<double>(endVector - startVector) / CLOCKS_PER_SEC * 1000000;
 		double	timeDeque = static_cast<double>(endDeque - startDeque) / CLOCKS_PER_SEC * 1000000;

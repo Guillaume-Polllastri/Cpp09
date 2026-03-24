@@ -6,7 +6,7 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 20:10:42 by gpollast          #+#    #+#             */
-/*   Updated: 2026/03/09 19:58:03 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/24 09:21:48 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,15 @@ struct Pair {
 	size_t	index;
 };
 
+struct Chain {
+	int		value;
+	size_t	index;
+};
+
 class PmergeMe {
 	public:
-	PmergeMe(std::vector<int> vec);
-	PmergeMe(std::deque<int> deq);
+	PmergeMe(std::vector<Chain> vec);
+	PmergeMe(std::deque<Chain> deq);
 	PmergeMe(const PmergeMe& copy);
 	PmergeMe& operator=(const PmergeMe& other);
 	~PmergeMe();
@@ -40,7 +45,7 @@ class PmergeMe {
 		Container	it;
 		for (it = begin; it != end; it++)
 		{
-			std::cout << *it << ' ';
+			std::cout << it->value << ' ';
 		}
 		std::cout << std::endl;
 	};
@@ -61,13 +66,16 @@ class PmergeMe {
         	    throw PmergeMe::BadInput();
         	if (tmp > INT_MAX || tmp < 0)
         	    throw PmergeMe::BadInput();
-        	deq.push_back(static_cast<int>(tmp));
+			Chain	tmpChain;
+			tmpChain.value = static_cast<int>(tmp);
+			tmpChain.index = i;
+        	deq.push_back(tmpChain);
 			i++;
 	    }
 	}
 
-	void	MergeInsertionSort(std::vector<int>& vec);
-	void	MergeInsertionSort(std::deque<int>& deq);
+	void	MergeInsertionSort(std::vector<Chain>& vec);
+	void	MergeInsertionSort(std::deque<Chain>& deq);
 	
 	class BadInput: public std::exception
 	{
@@ -77,8 +85,8 @@ class PmergeMe {
 			}
 	};
 	private:
-		std::vector<int>	_vec;
-		std::deque<int>		_deq;
+		std::vector<Chain>	_vec;
+		std::deque<Chain>	_deq;
 		bool				_hasRemainingValue;
 		int					_remainingValue;
 };
