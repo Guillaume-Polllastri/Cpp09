@@ -6,7 +6,7 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 13:51:36 by gpollast          #+#    #+#             */
-/*   Updated: 2026/03/05 10:37:03 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/24 10:08:22 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <sstream>
 #include <stdbool.h>
 #include <cstring>
+#include <climits>
 
 RPN::RPN() {}
 
@@ -43,24 +44,28 @@ static void	rpnCalculator(std::list<int>& lst, char c)
 	lst.pop_back();
 	int	b = lst.back();
 	lst.pop_back();
-	int result = 0;
+	long	result = 0;
 	switch (c)
 	{
 		case ('+'):
-			result = b + a;
+			result = static_cast<long>(b) + static_cast<long>(a);
 			break;
 		case ('-'):
-			result = b - a;
+			result = static_cast<long>(b) - static_cast<long>(a);
 			break;
 		case ('/'):
 			if (a == 0)
 				throw RPN::DivideByZero();
-			result = b / a;
+			result = static_cast<long>(b) / static_cast<long>(a);
 			break;
 		case ('*'):
-			result = b * a;
+			result = static_cast<long>(b) * static_cast<long>(a);
 	}
-	lst.push_back(result);
+	if (result > INT_MAX)
+	{
+		throw	RPN::IntOverflow();
+	}
+	lst.push_back(static_cast<int>(result));
 }
 
 static void	printRPNResult(std::list<int>& lst)
