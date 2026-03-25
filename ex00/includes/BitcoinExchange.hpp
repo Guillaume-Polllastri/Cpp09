@@ -6,7 +6,7 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 09:39:57 by gpollast          #+#    #+#             */
-/*   Updated: 2026/03/12 19:35:36 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/25 11:41:02 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ class BitcoinExchange {
 		class InvalidDate: public std::exception
 		{
 			public:
-				virtual const char* what() const throw() {
-					return "Error: invalid date => ";
-				}
+				virtual const char* what() const throw();
 		};
 };
 

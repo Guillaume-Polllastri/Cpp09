@@ -6,7 +6,7 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 20:10:42 by gpollast          #+#    #+#             */
-/*   Updated: 2026/03/24 09:21:48 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/25 11:37:20 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,7 @@ class PmergeMe {
 	class BadInput: public std::exception
 	{
 		public:
-			virtual const char* what() const throw() {
-				return "Error Please enter a positive integer sequence as an argument";
-			}
+			virtual const char* what() const throw();
 	};
 	private:
 		std::vector<Chain>	_vec;

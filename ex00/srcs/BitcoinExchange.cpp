@@ -6,7 +6,7 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 09:40:03 by gpollast          #+#    #+#             */
-/*   Updated: 2026/03/15 19:34:07 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/25 11:40:51 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange& other) {
 }
 
 BitcoinExchange::~BitcoinExchange() {}
+
+const char* BitcoinExchange::InvalidDate::what() const throw() {
+	return "Error: invalid date => ";
+}
+
 
 int	BitcoinExchange::fillData(const std::string& fileData) {
 	std::ifstream	file(fileData.c_str());

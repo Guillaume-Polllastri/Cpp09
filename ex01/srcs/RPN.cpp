@@ -6,7 +6,7 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 13:51:36 by gpollast          #+#    #+#             */
-/*   Updated: 2026/03/24 10:08:22 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/25 11:46:53 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@ RPN&    RPN::operator=(const RPN& other) {
 }
 
 RPN::~RPN() {}
+
+const char* RPN::BadInput::what() const throw() {
+	return "Error";
+}
+
+const char* RPN::DivideByZero::what() const throw() {
+	return "Error Divide by zero !";
+}
+
+const char* RPN::IntOverflow::what() const throw() {
+	return "Error Int Overflow !";	
+}
 
 static bool isOperator(char c)
 {

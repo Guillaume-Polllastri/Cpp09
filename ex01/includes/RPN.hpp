@@ -6,7 +6,7 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 13:52:14 by gpollast          #+#    #+#             */
-/*   Updated: 2026/03/24 09:55:05 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/25 11:47:44 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,17 @@ class RPN {
     	class BadInput: public std::exception
 		{
 			public:
-				virtual const char* what() const throw() {
-					return "Error";
-				}
+				virtual const char* what() const throw();
 		};
 
 		class DivideByZero: public std::exception
 		{
 			public:
-				virtual const char* what() const throw() {
-					return "Error Divide by zero !";
-				}
+				virtual const char* what() const throw();
 		};
 		class IntOverflow: public std::exception
 		{
 			public:
-				virtual const char* what() const throw() {
-					return "Error Int Overflow !";
-				}
+				virtual const char* what() const throw();
 		};
 };

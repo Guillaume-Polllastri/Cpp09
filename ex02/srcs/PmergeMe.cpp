@@ -6,7 +6,7 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 20:10:39 by gpollast          #+#    #+#             */
-/*   Updated: 2026/03/24 09:28:57 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/25 11:37:46 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ PmergeMe&	PmergeMe::operator=(const PmergeMe& other) {
 }
 
 PmergeMe::~PmergeMe() {}
+
+const char* PmergeMe::BadInput::what() const throw() {
+	return "Error Please enter a positive integer sequence as an argument";
+}
 
 /* ************************************************************************** */
 // STD::VECTOR
